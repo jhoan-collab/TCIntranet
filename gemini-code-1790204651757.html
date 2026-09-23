@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - The Reynolds Team TC Intranet</title>
+    <style>
+        :root {
+            --compass-black: #000000;
+            --compass-white: #ffffff;
+            --compass-gold: #C5A059;
+            --compass-light-bg: #f4f5f7;
+            --compass-text: #333333;
+            --compass-gray: #eaeaea;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--compass-black);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Portal Container */
+        .portal-container {
+            background-color: var(--compass-white);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border-top: 6px solid var(--compass-gold);
+            text-align: center;
+            box-sizing: border-box;
+            margin: 20px;
+        }
+
+        .brand-header h1 {
+            margin: 0;
+            font-weight: 700;
+            color: var(--compass-black);
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+        }
+
+        .brand-header p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            margin-bottom: 30px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--compass-text);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--compass-gray);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--compass-gold);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--compass-black);
+            color: var(--compass-white);
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--compass-gold);
+            color: var(--compass-black);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Links and Toggles */
+        .toggle-link {
+            display: block;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #666;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .toggle-link span {
+            color: var(--compass-gold);
+            font-weight: 600;
+        }
+
+        .toggle-link:hover span {
+            color: var(--compass-black);
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: none;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password:hover {
+            color: var(--compass-gold);
+        }
+
+        /* Hide Registration Form by Default */
+        #register-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portal-container">
+        
+        <div class="brand-header">
+            <h1>THE REYNOLDS TEAM</h1>
+            <p>TC Operations Intranet</p>
+        </div>
+
+        <!-- ================= LOGIN SECTION ================= -->
+        <div id="login-section">
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">Compass Email</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="name@compass.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                </div>
+
+                <a href="#" class="forgot-password">Forgot Password?</a>
+
+                <button type="submit" class="btn-submit">Sign In</button>
+            </form>
+
+            <a class="toggle-link" onclick="toggleForms()">
+                Need access? <span>Register here</span>
+            </a>
+        </div>
+
+        <!-- ================= REGISTRATION SECTION ================= -->
+        <div id="register-section">
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" class="form-control" placeholder="Jane Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-email">Compass Email</label>
+                    <input type="email" id="reg-email" class="form-control" placeholder="name@compass.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-password">Create Password</label>
+                    <input type="password" id="reg-password" class="form-control" placeholder="••••••••" required>
+                </div>
+
+                <!-- Team Access Code for an extra layer of security -->
+                <div class="form-group">
+                    <label for="reg-code">Team Access Code</label>
+                    <input type="password" id="reg-code" class="form-control" placeholder="Provided by Admin" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+
+            <a class="toggle-link" onclick="toggleForms()">
+                Already registered? <span>Log in here</span>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        // Toggle between Login and Register views
+        function toggleForms() {
+            const loginSection = document.getElementById('login-section');
+            const registerSection = document.getElementById('register-section');
+
+            if (loginSection.style.display === 'none') {
+                loginSection.style.display = 'block';
+                registerSection.style.display = 'none';
+            } else {
+                loginSection.style.display = 'none';
+                registerSection.style.display = 'block';
+            }
+        }
+
+        // Login Handler (Redirects directly to your published Google Site)
+        function handleLogin(event) {
+            event.preventDefault(); // Prevents page reload
+            
+            // Redirects the user to the published TC Intranet URL
+            window.location.href = "https://sites.google.com/myreynoldsteam.com/thereynoldsteam-tcintranet/home"; 
+        }
+
+        // Register Handler
+        function handleRegister(event) {
+            event.preventDefault(); // Prevents page reload
+            
+            const accessCode = document.getElementById('reg-code').value;
+            
+            // Checking the access code (Currently set to TRT2026)
+            if(accessCode !== "TRT2026") {
+                alert("Invalid Team Access Code. Please contact your administrator.");
+                return;
+            }
+
+            alert("Registration successful! You can now log in.");
+            toggleForms(); // Switch back to login screen so they can log in
+            
+            // Auto-fill the email they just registered with for convenience
+            document.getElementById('login-email').value = document.getElementById('reg-email').value;
+        }
+    </script>
+</body>
+</html>
